@@ -25,6 +25,7 @@
     "@nestjs/passport": "^6.2.0",
     "@nestjs/platform-express": "^6.0.0",
     "@nestjs/typeorm": "^6.3.3",
+    "bcrypt": "^4.0.1",
     "mysql": "^2.18.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",

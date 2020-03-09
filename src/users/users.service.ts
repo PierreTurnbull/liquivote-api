@@ -14,4 +14,14 @@ export class UsersService {
     ;
     return user;
   }
+
+  async createOne(username: string, hashedPassword: string) {
+    const user = new UsersEntity();
+    user.username = username;
+    user.hashedPassword = hashedPassword;
+    const result = await getRepository(UsersEntity)
+      .insert(user)
+    ;
+    return result;
+  }
 }

@@ -1,4 +1,5 @@
-import { PrimaryGeneratedColumn, Column, Entity } from "typeorm";
+import { PrimaryGeneratedColumn, Column, Entity, OneToMany } from "typeorm";
+import { PostsEntity } from "src/posts/posts.entity";
 
 @Entity('users')
 export class UsersEntity {
@@ -10,4 +11,7 @@ export class UsersEntity {
 
     @Column()
     hashedPassword: string;
+
+    @OneToMany(type => PostsEntity, post => post.user)
+    posts: PostsEntity[];
 }

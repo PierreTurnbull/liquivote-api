@@ -12,6 +12,9 @@ export class PostsEntity {
     @Column()
     content: string;
 
+    @Column()
+    userId: number;
+
     @ManyToOne(type => UsersEntity, user => user.posts)
     user: UsersEntity;
 }

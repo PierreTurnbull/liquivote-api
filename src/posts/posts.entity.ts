@@ -1,7 +1,9 @@
-import { PrimaryGeneratedColumn, Column, Entity, ManyToOne } from "typeorm";
+import { PrimaryGeneratedColumn, Column, Entity, ManyToOne, OneToMany, Index, JoinColumn, PrimaryColumn } from "typeorm";
 import { UsersEntity } from "src/users/users.entity";
+import { AppreciationsEntity } from "src/appreciations/appreciations.entity";
 
 @Entity('posts')
+@Index(['id', 'userId'])
 export class PostsEntity {
     @PrimaryGeneratedColumn()
     id: number;
@@ -17,4 +19,7 @@ export class PostsEntity {
 
     @ManyToOne(type => UsersEntity, user => user.posts)
     user: UsersEntity;
+
+    @OneToMany(type => AppreciationsEntity, appreciation => appreciation.post)
+    appreciations: AppreciationsEntity[];
 }

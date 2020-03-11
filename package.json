@@ -11,6 +11,8 @@
     "start:debug": "nodemon --config nodemon-debug.json",
     "prestart:prod": "rimraf dist && npm run build",
     "start:prod": "node dist/main.js",
+    "db:load": "npm run db:dump && myloader -h 127.0.0.1 -P 3306 -u root -p root -B liquivote -v 3 -d ./db/ -o",
+    "db:dump": "mydumper -h 127.0.0.1 -P 3306 -o ./db/ -B liquivote -u root -p root -d -t 8 -v 3 --lock-all-tables",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
     "test:watch": "jest --watch",

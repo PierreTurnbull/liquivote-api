@@ -20,6 +20,7 @@ export class RegisterStrategy extends PassportStrategy(Strategy, 'register') {
     if (user) { throw new ConflictException() }
 
     const hashedPassword = await bcrypt.hash(pass, 10);
+    console.log(hashedPassword);
     const result = await this.usersService.createOne(username, hashedPassword);
     return result
   }

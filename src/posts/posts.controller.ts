@@ -1,4 +1,4 @@
-import { Controller, Get, Request, Post, UseGuards, Body, Param, Put, ForbiddenException } from '@nestjs/common';
+import { Controller, Get, Request, Post, UseGuards, Body, Param, Put, ForbiddenException, NotFoundException, ConflictException } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { PostsService } from './posts.service';
 import { PostsDTO } from './posts.dto';
@@ -31,9 +31,13 @@ export class PostsController {
   @Put(':id')
   async updateOne(@Param() id, @Body() post, @Request() req) {
     const persistedPost = await this.postsService.findOne(id);
+    if (!persistedPost) {
+      throw new NotFoundException()
+    }
     if (persistedPost.userId !== req.user.id) {
       throw new ForbiddenException()
     }
+
     return this.postsService.updateOne(id, post, req.user);
   }
 }

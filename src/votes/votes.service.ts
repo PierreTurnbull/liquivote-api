@@ -4,18 +4,19 @@ import { getRepository } from 'typeorm';
 
 @Injectable()
 export class VotesService {
-  async find() {
+  async find(userId: number = null, postId: number = null) {
+    const where = {}
+    if (userId !== null) { where['userId'] = userId }
+    if (postId !== null) { where['postId'] = postId }
     const votes = await getRepository(VotesEntity)
-      .find()
-    ;
+      .find({ where })
     return votes;
   }
 
   async findOne(id: number) {
     const vote = await getRepository(VotesEntity)
       .findOne(id)
-    ;
-    return vote;
+    return vote
   }
 
   async createOne(vote, user) {
@@ -23,19 +24,18 @@ export class VotesService {
     voteModel.userId = user.id
     voteModel.postId = vote.postId
     voteModel.value = vote.value
-    await getRepository(VotesEntity)
-      .insert(voteModel)
+    let persistedVote = await getRepository(VotesEntity)
+      .save(voteModel)
     ;
-    return null;
+    return persistedVote;
   }
 
   async updateOne(id, vote) {
-    let voteModel = new VotesEntity();
-    voteModel.value = vote.value
-    await getRepository(VotesEntity)
-      .update(id, voteModel)
+    let persistedVote = await this.findOne(id);
+    persistedVote.value = vote.value
+    return await getRepository(VotesEntity)
+      .save(persistedVote)
     ;
-    return null;
   }
 
   async deleteOne(id) {

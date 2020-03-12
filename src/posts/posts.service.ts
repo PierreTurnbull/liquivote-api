@@ -33,12 +33,11 @@ export class PostsService {
   }
 
   async updateOne(id, post, user) {
-    let postModel = new PostsEntity();
-    postModel.title = post.title
-    postModel.content = post.content
-    await getRepository(PostsEntity)
-      .update(id, postModel)
+    let persistedPost = await this.findOne(id)
+    persistedPost.title = post.title
+    persistedPost.content = post.content
+    return await getRepository(PostsEntity)
+      .save(persistedPost)
     ;
-    return null;
   }
 }

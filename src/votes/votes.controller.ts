@@ -14,8 +14,8 @@ export class VotesController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() votes, @Request() req) {
-    return this.votesService.create(votes, req.user);
+  async create(@Body() body, @Request() req) {
+    return this.votesService.createOne(body, req.user);
   }
 
   @UseGuards(JwtAuthGuard)

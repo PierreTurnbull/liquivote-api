@@ -18,16 +18,13 @@ export class VotesService {
     return vote;
   }
 
-  async create(votes, user) {
-    let votesModel: VotesEntity[] = votes.map(vote => {
-      let voteModel = new VotesEntity();
-      voteModel.userId = user.id
-      voteModel.postId = vote.postId
-      voteModel.value = vote.value
-      return voteModel
-    })
+  async createOne(vote, user) {
+    let voteModel = new VotesEntity();
+    voteModel.userId = user.id
+    voteModel.postId = vote.postId
+    voteModel.value = vote.value
     await getRepository(VotesEntity)
-      .insert(votesModel)
+      .insert(voteModel)
     ;
     return null;
   }

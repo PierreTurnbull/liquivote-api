@@ -1,4 +1,5 @@
 import { UsersDTO } from "src/auth/users.dto";
+import { VotesDTO } from "src/votes/votes.dto";
 
 export class PostsDTO {
   id: number;
@@ -9,4 +10,5 @@ export class PostsDTO {
   votesCount: number;
   votesYesCount: number;
   votesNoCount: number;
+  currentUserVote: VotesDTO;
 }

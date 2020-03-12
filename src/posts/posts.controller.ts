@@ -10,9 +10,9 @@ export class PostsController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async find(): Promise<PostsDTO[]> {
+  async find(@Request() request): Promise<PostsDTO[]> {
     const data = await this.postsService.find();
-    return PostsFormatter.getFormattedPosts(data);
+    return PostsFormatter.getFormattedPosts(data, request.user.id);
   }
 
   @UseGuards(JwtAuthGuard)

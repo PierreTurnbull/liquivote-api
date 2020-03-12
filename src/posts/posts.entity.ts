@@ -1,6 +1,6 @@
 import { PrimaryGeneratedColumn, Column, Entity, ManyToOne, OneToMany, Index } from "typeorm";
 import { UsersEntity } from "src/users/users.entity";
-import { AppreciationsEntity } from "src/appreciations/appreciations.entity";
+import { VotesEntity } from "src/votes/votes.entity";
 
 @Entity('posts')
 export class PostsEntity {
@@ -19,6 +19,6 @@ export class PostsEntity {
     @ManyToOne(type => UsersEntity, user => user.posts)
     user: UsersEntity;
 
-    @OneToMany(type => AppreciationsEntity, appreciation => appreciation.post)
-    appreciations: AppreciationsEntity[];
+    @OneToMany(type => VotesEntity, vote => vote.post)
+    votes: VotesEntity[];
 }

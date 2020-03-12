@@ -7,9 +7,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostsController } from './posts/posts.controller';
 import { PostsService } from './posts/posts.service';
 import { PostsModule } from './posts/posts.module';
-import { AppreciationsController } from './appreciations/appreciations.controller';
-import { AppreciationsEntity } from './appreciations/appreciations.entity';
-import { AppreciationsModule } from './appreciations/appreciations.module';
+import { VotesController } from './votes/votes.controller';
+import { VotesEntity } from './votes/votes.entity';
+import { VotesModule } from './votes/votes.module';
 
 @Module({
   imports: [
@@ -28,9 +28,9 @@ import { AppreciationsModule } from './appreciations/appreciations.module';
     AuthModule,
     UsersModule,
     PostsModule,
-    AppreciationsModule
+    VotesModule
   ],
-  controllers: [AppController, PostsController, AppreciationsController],
-  providers: [AppService, PostsService, AppreciationsEntity],
+  controllers: [AppController, PostsController, VotesController],
+  providers: [AppService, PostsService, VotesEntity],
 })
 export class AppModule {}

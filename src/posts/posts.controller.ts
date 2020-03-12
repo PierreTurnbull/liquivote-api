@@ -1,6 +1,8 @@
 import { Controller, Get, Request, Post, UseGuards, Body, Param, Put, ForbiddenException } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { PostsService } from './posts.service';
+import { PostsDTO } from './posts.dto';
+import { PostsFormatter } from './posts.formatter';
 
 @Controller('posts')
 export class PostsController {
@@ -8,8 +10,9 @@ export class PostsController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async find() {
-    return this.postsService.find();
+  async find(): Promise<PostsDTO[]> {
+    const data = await this.postsService.find();
+    return PostsFormatter.getFormattedPosts(data);
   }
 
   @UseGuards(JwtAuthGuard)

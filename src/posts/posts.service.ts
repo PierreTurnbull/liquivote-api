@@ -6,14 +6,14 @@ import { getRepository } from 'typeorm';
 export class PostsService {
   async find() {
     const posts = await getRepository(PostsEntity)
-      .find()
+      .find({ relations: ['user', 'votes'] })
     ;
     return posts;
   }
 
   async findOne(id: number) {
     const post = await getRepository(PostsEntity)
-      .findOne(id)
+      .findOne(id, { relations: ['user', 'votes'] })
     ;
     return post;
   }

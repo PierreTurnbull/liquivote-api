@@ -1,9 +1,9 @@
 import { Column, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn, Index } from "typeorm";
 import { PostsEntity } from "src/posts/posts.entity";
 
-@Entity('appreciations')
+@Entity('votes')
 @Index(['postId', 'userId'], { unique: true })
-export class AppreciationsEntity {
+export class VotesEntity {
     @PrimaryGeneratedColumn()
     id: number;
 

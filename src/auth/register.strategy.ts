@@ -11,16 +11,15 @@ export class RegisterStrategy extends PassportStrategy(Strategy, 'register') {
   }
 
   async validate(req: any) {
-    const { username, pass } = req.body;
+    const { username, password } = req.body;
     // request body must be valid
-    if (!username || !pass) { throw new BadRequestException() }
+    if (!username || !password) { throw new BadRequestException() }
 
     const user = await this.usersService.findOne(username);
     // user must not already exist
     if (user) { throw new ConflictException() }
 
-    const hashedPassword = await bcrypt.hash(pass, 10);
-    console.log(hashedPassword);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const result = await this.usersService.createOne(username, hashedPassword);
     return result
   }

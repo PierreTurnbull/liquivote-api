@@ -3,6 +3,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { RegisterAuthGuard } from './auth/register-auth.guard';
+const bcrypt = require('bcrypt');
 
 @Controller()
 export class AppController {

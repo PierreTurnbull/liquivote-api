@@ -23,7 +23,7 @@ export class VotesController {
 
   @UseGuards(JwtAuthGuard)
   @Put(':id')
-  async updateOne(@Param() id, @Body() post, @Request() req) {
+  async updateOne(@Param() id, @Body() vote, @Request() req) {
     const persistedVote = await this.votesService.findOne(id);
     if (!persistedVote) {
       throw new NotFoundException()
@@ -32,7 +32,7 @@ export class VotesController {
       throw new ForbiddenException()
     }
 
-    return this.votesService.updateOne(id, post);
+    return this.votesService.updateOne(id, vote);
   }
 
   @UseGuards(JwtAuthGuard)

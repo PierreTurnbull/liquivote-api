@@ -60,7 +60,7 @@ resource "aws_security_group" "redis_security_group" {
 
 resource "aws_elb" "application" {
   name               = "${var.stage}-app-elb"
-  availability_zones = ["eu-west-2a"]
+  availability_zones = ["eu-west-3a"]
 
   listener {
     instance_port     = 8080

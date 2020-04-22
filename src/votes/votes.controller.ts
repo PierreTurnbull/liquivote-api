@@ -14,11 +14,11 @@ export class VotesController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() body, @Request() req) {
-    const persistedVote = (await this.votesService.find(req.user.id, body.postId))[0]
+  async create(@Body() vote, @Request() req) {
+    const persistedVote = (await this.votesService.find(req.user.id, vote.postId))[0]
     if (persistedVote) { throw new ConflictException() }
 
-    return this.votesService.createOne(body, req.user);
+    return this.votesService.createOne(vote, req.user);
   }
 
   @UseGuards(JwtAuthGuard)
